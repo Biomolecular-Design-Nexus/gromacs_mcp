@@ -1,0 +1,87 @@
+{
+  "_description": "Configuration for GROMACS command execution script",
+  "_source": "Extracted from examples/use_case_4_commandline_operations.py",
+
+  "commands": {
+    "rms": {
+      "description": "RMSD analysis",
+      "required_inputs": ["structure", "trajectory"],
+      "default_output": "rmsd.xvg",
+      "parameters": ["-tu", "ns"],
+      "interactive_selections": ["4", "4"]
+    },
+    "rmsf": {
+      "description": "RMSF analysis",
+      "required_inputs": ["structure", "trajectory"],
+      "default_output": "rmsf.xvg",
+      "parameters": ["-res"],
+      "interactive_selections": ["4"]
+    },
+    "energy": {
+      "description": "Energy analysis",
+      "required_inputs": ["energy"],
+      "default_output": "energy.xvg",
+      "parameters": [],
+      "interactive_selections": ["10", "0"]
+    },
+    "sasa": {
+      "description": "Surface area analysis",
+      "required_inputs": ["structure", "trajectory"],
+      "default_output": "area.xvg",
+      "parameters": [],
+      "interactive_selections": ["1"]
+    },
+    "hbond": {
+      "description": "Hydrogen bond analysis",
+      "required_inputs": ["structure", "trajectory"],
+      "default_output": "hbnum.xvg",
+      "parameters": [],
+      "interactive_selections": ["1", "1"]
+    },
+    "trjconv": {
+      "description": "Trajectory conversion",
+      "required_inputs": ["structure", "trajectory"],
+      "default_output": "trajout.xtc",
+      "parameters": ["-pbc", "mol", "-center"],
+      "interactive_selections": ["1", "0"]
+    },
+    "dump": {
+      "description": "Dump file contents",
+      "required_inputs": ["structure"],
+      "default_output": "dump.txt",
+      "parameters": [],
+      "interactive_selections": []
+    },
+    "check": {
+      "description": "Check file integrity",
+      "required_inputs": ["structure"],
+      "default_output": null,
+      "parameters": [],
+      "interactive_selections": []
+    }
+  },
+
+  "execution": {
+    "timeout": 300,
+    "interactive_input": "echo '0' |",
+    "working_directory": null,
+    "continue_on_warning": true,
+    "description": "Command execution settings"
+  },
+
+  "input_flags": {
+    "structure": "s",
+    "trajectory": "f",
+    "energy": "e",
+    "index": "n",
+    "topology": "p",
+    "description": "Standard GROMACS input file flags"
+  },
+
+  "output_flags": {
+    "output": "o",
+    "xvg": "o",
+    "log": "g",
+    "description": "Standard GROMACS output file flags"
+  }
+}

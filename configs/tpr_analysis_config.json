@@ -1,0 +1,40 @@
+{
+  "_description": "Configuration for TPR analysis script",
+  "_source": "Extracted from examples/use_case_2_read_tpr_file.py",
+
+  "analysis": {
+    "timeout": 60,
+    "include_raw_dump": true,
+    "output_format": "text",
+    "parse_patterns": true,
+    "description": "Analysis execution parameters"
+  },
+
+  "output_sections": [
+    "file_info",
+    "simulation_parameters",
+    "system_information",
+    "raw_dump"
+  ],
+
+  "parsing": {
+    "extract_basic_params": true,
+    "extract_atom_info": true,
+    "extract_forces": false,
+    "count_atom_types": true,
+    "description": "What information to extract from TPR dump"
+  },
+
+  "formats": {
+    "text": {
+      "include_headers": true,
+      "format_numbers": true,
+      "show_units": true
+    },
+    "json": {
+      "pretty_print": true,
+      "include_metadata": true,
+      "include_raw": false
+    }
+  }
+}

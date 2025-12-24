@@ -1,0 +1,60 @@
+{
+  "_description": "Default configuration for all MCP GROMACS scripts",
+  "_version": "1.0.0",
+
+  "global": {
+    "log_level": "INFO",
+    "timeout": 300,
+    "verbose": false,
+    "working_directory": null,
+    "description": "Global settings applied to all scripts"
+  },
+
+  "gromacs": {
+    "command_prefix": ["gmx"],
+    "fallback_command": ["mamba", "run", "-p", "./env", "gmx"],
+    "version_check": true,
+    "environment_path": "./env",
+    "description": "GROMACS installation and command settings"
+  },
+
+  "paths": {
+    "input_data": "examples/data",
+    "output_base": "results",
+    "temp_directory": "/tmp/gromacs_mcp",
+    "log_directory": "logs",
+    "description": "Default path configurations"
+  },
+
+  "file_handling": {
+    "backup_inputs": false,
+    "create_output_dirs": true,
+    "overwrite_outputs": true,
+    "check_disk_space": false,
+    "description": "File operation settings"
+  },
+
+  "error_handling": {
+    "continue_on_warning": true,
+    "retry_on_timeout": false,
+    "max_retries": 0,
+    "log_errors": true,
+    "description": "Error handling behavior"
+  },
+
+  "performance": {
+    "max_parallel_jobs": 1,
+    "memory_limit_gb": 8,
+    "cpu_cores": -1,
+    "use_gpu": false,
+    "description": "Performance and resource settings"
+  },
+
+  "demo_mode": {
+    "enabled": true,
+    "short_simulations": true,
+    "demo_data_path": "examples/data",
+    "quick_tests": true,
+    "description": "Settings for demo and testing"
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "_description": "Configuration for GROMACS workflow management script",
+  "_source": "Extracted from examples/use_case_5_workflow_management.py",
+
+  "workflows": {
+    "simple_md": {
+      "description": "Simple MD workflow: grompp -> mdrun",
+      "required_inputs": ["structure", "topology", "mdp"],
+      "steps": ["grompp", "mdrun"],
+      "default_nsteps": 1000,
+      "timeout_per_step": 300
+    },
+    "analysis": {
+      "description": "Trajectory analysis workflow",
+      "required_inputs": ["structure", "trajectory"],
+      "steps": ["rms", "rmsf", "energy"],
+      "default_selections": ["Protein", "Protein", "Potential"],
+      "parallel_execution": false
+    },
+    "preprocessing": {
+      "description": "System preprocessing workflow",
+      "required_inputs": ["structure"],
+      "steps": ["pdb2gmx", "editconf", "solvate", "genion"],
+      "force_field": "oplsaa",
+      "water_model": "spce",
+      "box_type": "cubic",
+      "box_distance": 1.0
+    },
+    "demo": {
+      "description": "Demo workflow showing patterns",
+      "required_inputs": [],
+      "steps": ["show_patterns"],
+      "patterns": ["linear", "parallel", "branched", "iterative"]
+    }
+  },
+
+  "execution": {
+    "timeout": 600,
+    "step_timeout": 300,
+    "continue_on_error": false,
+    "log_level": "INFO",
+    "parallel_steps": false,
+    "description": "Workflow execution parameters"
+  },
+
+  "dependencies": {
+    "simple_md": {
+      "mdrun": ["grompp"]
+    },
+    "analysis": {
+      "rmsf": ["rms"],
+      "energy": ["rms", "rmsf"]
+    },
+    "preprocessing": {
+      "editconf": ["pdb2gmx"],
+      "solvate": ["editconf"],
+      "genion": ["solvate"]
+    }
+  },
+
+  "file_patterns": {
+    "structure_files": ["*.gro", "*.pdb"],
+    "trajectory_files": ["*.xtc", "*.trr"],
+    "energy_files": ["*.edr"],
+    "topology_files": ["*.top"],
+    "parameter_files": ["*.mdp"],
+    "description": "File type patterns for validation"
+  },
+
+  "output_organization": {
+    "create_step_dirs": false,
+    "preserve_intermediate": true,
+    "compress_large_files": false,
+    "cleanup_on_error": false
+  }
+}

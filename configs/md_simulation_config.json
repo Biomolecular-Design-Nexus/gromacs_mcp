@@ -1,0 +1,32 @@
+{
+  "_description": "Configuration for MD simulation script",
+  "_source": "Extracted from examples/use_case_1_basic_md_simulation.py",
+
+  "simulation": {
+    "default_nsteps": 100,
+    "timeout": 300,
+    "tpr_name": "topol.tpr",
+    "description": "Basic MD simulation parameters"
+  },
+
+  "output_files": {
+    "trajectory": "traj.trr",
+    "configuration": "confout.gro",
+    "energy": "ener.edr",
+    "log": "md.log",
+    "description": "Standard GROMACS output files"
+  },
+
+  "gromacs": {
+    "mdrun_flags": ["-ntomp", "1"],
+    "verbose_mode": false,
+    "backup_files": true,
+    "description": "GROMACS-specific settings"
+  },
+
+  "demo": {
+    "use_demo_data": true,
+    "demo_nsteps": 100,
+    "description": "Settings for demo/testing mode"
+  }
+}
