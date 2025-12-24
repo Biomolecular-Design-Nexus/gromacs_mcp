@@ -1,0 +1,8 @@
+{
+  "setup_commands": [
+    "(command -v mamba >/dev/null 2>&1 && mamba create -p ./env python=3.10 -y) || (command -v conda >/dev/null 2>&1 && conda create -p ./env python=3.10 -y) || (echo \"Warning: Neither mamba nor conda found, creating venv instead\" && python3 -m venv ./env)",
+    "./env/bin/python -m pip install --upgrade pip",
+    "(command -v mamba >/dev/null 2>&1 && mamba install -c conda-forge -p ./env gromacs=2025.4 -y) || (command -v conda >/dev/null 2>&1 && conda install -c conda-forge -p ./env gromacs=2025.4 -y) || echo \"Warning: Could not install GROMACS via conda/mamba. Please install manually.\"",
+    "./env/bin/pip install fastmcp loguru --ignore-installed"
+  ]
+}

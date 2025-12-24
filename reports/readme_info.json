@@ -1,0 +1,189 @@
+{
+  "project_name": "gromacs-2025.4",
+  "description": "MCP server for GROMACS 2025.4 providing molecular dynamics simulation, analysis, and workflow management tools with both local scripts and MCP tools supporting synchronous operations for quick analysis and asynchronous job submission for long-running simulations",
+  "tools": [
+    {
+      "name": "analyze_tpr",
+      "type": "sync",
+      "description": "Analyze TPR files and extract simulation parameters",
+      "example_prompt": "Use analyze_tpr to examine @examples/data/sample.tpr and save results to results/analysis.txt",
+      "runtime": "~3 seconds"
+    },
+    {
+      "name": "run_gromacs_command",
+      "type": "sync",
+      "description": "Execute GROMACS command-line tools with flexible parameter handling",
+      "example_prompt": "Run the GROMACS dump command on @examples/data/sample.tpr to see the file structure",
+      "runtime": "1-3 seconds"
+    },
+    {
+      "name": "run_gromacs_workflow",
+      "type": "sync",
+      "description": "Create and manage GROMACS simulation workflows",
+      "example_prompt": "Run the demo workflow with verbose output to see how workflow management works",
+      "runtime": "~1.5 seconds"
+    },
+    {
+      "name": "submit_md_simulation",
+      "type": "submit",
+      "description": "Submit molecular dynamics simulation for background processing",
+      "example_prompt": "Submit an MD simulation for @examples/data/sample.tpr with 50000 steps, name it 'long_test'",
+      "runtime": "Minutes to hours"
+    },
+    {
+      "name": "submit_batch_analysis",
+      "type": "submit",
+      "description": "Submit batch analysis for multiple input files",
+      "example_prompt": "Submit batch analysis for these TPR files: @examples/data/sample.tpr",
+      "runtime": "Variable"
+    },
+    {
+      "name": "get_job_status",
+      "type": "job_management",
+      "description": "Check job progress and status",
+      "example_prompt": "Check the status of job long_test"
+    },
+    {
+      "name": "get_job_result",
+      "type": "job_management",
+      "description": "Get results when completed",
+      "example_prompt": "Get the results for the latest job"
+    },
+    {
+      "name": "get_job_log",
+      "type": "job_management",
+      "description": "View execution logs with tail support",
+      "example_prompt": "Get the log output for the latest job"
+    },
+    {
+      "name": "cancel_job",
+      "type": "job_management",
+      "description": "Cancel running job",
+      "example_prompt": "Cancel the running simulation job"
+    },
+    {
+      "name": "list_jobs",
+      "type": "job_management",
+      "description": "List all jobs with optional status filter",
+      "example_prompt": "List all running jobs"
+    },
+    {
+      "name": "get_server_info",
+      "type": "information",
+      "description": "Get server version and capabilities",
+      "example_prompt": "What are the capabilities of this GROMACS MCP server?"
+    },
+    {
+      "name": "list_available_commands",
+      "type": "information",
+      "description": "List all supported commands and workflows",
+      "example_prompt": "What tools are available from gromacs-2025.4?"
+    }
+  ],
+  "scripts": [
+    {
+      "name": "md_simulation.py",
+      "description": "Run MD simulations using GROMACS mdrun",
+      "example_command": "python scripts/md_simulation.py --input examples/data/sample.tpr --output results/md_sim --nsteps 100"
+    },
+    {
+      "name": "tpr_analysis.py",
+      "description": "Analyze TPR files using gmx dump",
+      "example_command": "python scripts/tpr_analysis.py --input examples/data/sample.tpr --output analysis.txt --format text"
+    },
+    {
+      "name": "gromacs_command.py",
+      "description": "Execute GROMACS command-line tools",
+      "example_command": "python scripts/gromacs_command.py --command dump --input s examples/data/sample.tpr"
+    },
+    {
+      "name": "gromacs_workflow.py",
+      "description": "Manage GROMACS simulation workflows",
+      "example_command": "python scripts/gromacs_workflow.py --workflow demo --verbose"
+    }
+  ],
+  "demo_data": [
+    {
+      "file": "sample.tpr",
+      "description": "Compiled simulation file (1000 Argon atoms, 500k steps)",
+      "used_by": ["analyze_tpr", "submit_md_simulation", "run_gromacs_command"]
+    },
+    {
+      "file": "sample.gro",
+      "description": "Structure file (1000 Argon atoms)",
+      "used_by": ["input preparation"]
+    },
+    {
+      "file": "sample.mdp",
+      "description": "MD parameters (500k steps, 87K temperature, md-vv integrator)",
+      "used_by": ["input preparation"]
+    },
+    {
+      "file": "sample.top",
+      "description": "Topology file (1000 Argon atoms, Lennard-Jones parameters)",
+      "used_by": ["input preparation"]
+    },
+    {
+      "file": "mdout.mdp",
+      "description": "Processed parameters from GROMACS preprocessing",
+      "used_by": ["analysis"]
+    },
+    {
+      "file": "testdata.json",
+      "description": "Test data definitions for gmxapi development",
+      "used_by": ["development"]
+    }
+  ],
+  "configs": [
+    {
+      "file": "md_simulation_config.json",
+      "description": "MD simulation settings",
+      "parameters": ["nsteps", "timeout", "output_files", "performance_report"]
+    },
+    {
+      "file": "tpr_analysis_config.json",
+      "description": "TPR analysis options",
+      "parameters": ["output_format", "parsing_settings", "include_raw"]
+    },
+    {
+      "file": "gromacs_command_config.json",
+      "description": "Command execution settings",
+      "parameters": ["timeouts", "supported_commands", "interactive_input"]
+    },
+    {
+      "file": "gromacs_workflow_config.json",
+      "description": "Workflow definitions",
+      "parameters": ["step_dependencies", "execution_order", "workflow_types"]
+    },
+    {
+      "file": "default_config.json",
+      "description": "Global default settings",
+      "parameters": ["paths", "logging", "error_handling", "performance"]
+    }
+  ],
+  "installation": {
+    "environment_manager": "mamba (preferred) / conda",
+    "python_version": "3.10+",
+    "key_dependencies": ["fastmcp", "loguru", "gromacs=2025.4"],
+    "mcp_installation_options": [
+      "fastmcp install src/server.py --name gromacs-2025.4",
+      "claude mcp add gromacs-2025.4 -- $(pwd)/env/bin/python $(pwd)/src/server.py",
+      "Manual settings.json configuration"
+    ]
+  },
+  "system_details": {
+    "demo_system": "Liquid Argon simulation",
+    "atoms": 1000,
+    "temperature": "87 K",
+    "integrator": "md-vv (velocity Verlet)",
+    "thermostat": "Nose-Hoover",
+    "barostat": "MTTK pressure coupling"
+  },
+  "performance": {
+    "sync_tools": "1-3 seconds typical",
+    "job_submission": "<1 second",
+    "md_simulation": "15.2s for 100 steps (433 ns/day)",
+    "tpr_analysis": "~3 seconds",
+    "batch_processing": "Linear scaling with file count"
+  }
+}

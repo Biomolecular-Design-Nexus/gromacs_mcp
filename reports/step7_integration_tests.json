@@ -1,0 +1,80 @@
+{
+  "test_date": "2025-12-20T23:15:25.369858",
+  "project_root": "/home/xux/Desktop/ProteinMCP/ProteinMCP/tool-mcps/gromacs_mcp",
+  "server_path": "/home/xux/Desktop/ProteinMCP/ProteinMCP/tool-mcps/gromacs_mcp/src/server.py",
+  "python_path": "/home/xux/Desktop/ProteinMCP/ProteinMCP/tool-mcps/gromacs_mcp/env/bin/python",
+  "tests": {
+    "directory_structure": {
+      "status": "passed",
+      "existing_dirs": [
+        "src",
+        "scripts",
+        "examples/data",
+        "env/bin"
+      ],
+      "missing_dirs": []
+    },
+    "dependencies": {
+      "status": "passed",
+      "output": "Dependencies OK",
+      "error": null
+    },
+    "server_startup": {
+      "status": "passed",
+      "output": "Server imported successfully",
+      "error": null,
+      "duration_seconds": 1.0
+    },
+    "tool_discovery": {
+      "status": "passed",
+      "expected_tools_count": 12,
+      "expected_tools": [
+        "get_job_status",
+        "get_job_result",
+        "get_job_log",
+        "cancel_job",
+        "list_jobs",
+        "analyze_tpr",
+        "run_gromacs_command",
+        "run_gromacs_workflow",
+        "submit_md_simulation",
+        "submit_batch_analysis",
+        "list_available_commands",
+        "get_server_info"
+      ],
+      "note": "Tools discovered from source code analysis"
+    },
+    "sample_data_availability": {
+      "status": "passed",
+      "available_files": [
+        "examples/data/sample.tpr",
+        "examples/data/sample.gro",
+        "examples/data/sample.top",
+        "examples/data/sample.mdp"
+      ],
+      "missing_files": [],
+      "note": "At least sample.tpr is required for testing"
+    },
+    "fastmcp_dev_startup": {
+      "status": "failed",
+      "output": "",
+      "error": "/home/xux/Desktop/ProteinMCP/ProteinMCP/tool-mcps/gromacs_mcp/env/bin/python: No module named fastmcp.__main__; 'fastmcp' is a package and cannot be directly executed\n",
+      "note": "Server startup tested with 3-second timeout"
+    },
+    "claude_mcp_registration": {
+      "status": "passed",
+      "registered": true,
+      "connected": true,
+      "claude_output": "Checking MCP server health...\n\ncontext7: npx -y @upstash/context7-mcp@latest - \u2713 Connected\nProteinMPNN_mcp: /home/xux/Desktop/ProteinMCP/ProteinMCP/tool-mcps/proteinmpnn_mcp/env/bin/python3.10 /home/xux/Desktop/ProteinMCP/ProteinMCP/tool-mcps/proteinmpnn_mcp/src/server.py - \u2717 Failed to connect\nprotein_sol_mcp: /home/xux/Desktop/ProteinMCP/ProteinMCP/tool-mcps/protein_sol_mcp/env/bin/python3.10 /home/xux/Desktop/ProteinMCP/ProteinMCP/tool-mcps/protein_sol_mcp/src/server.py - \u2713 Connected\ngromacs-mcp: /home/xux/Desktop/ProteinMCP/ProteinMCP/tool-mcps/gromacs_mcp/env/bin/python /home/xux/Desktop/ProteinMCP/ProteinMCP/tool-mcps/gromacs_mcp/src/server.py - \u2713 Connected"
+    }
+  },
+  "issues": [],
+  "summary": {
+    "total_tests": 7,
+    "passed": 6,
+    "failed": 1,
+    "pass_rate": "85.7%",
+    "ready_for_production": false,
+    "claude_integration_ready": true
+  }
+}
